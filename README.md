@@ -1,6 +1,6 @@
 # SafeView
 
-🌐 Project website: https://YOUR-USERNAME.github.io/SafeView
+🌐 Project website: https://MBasiratpour.github.io/SafeView
 
 > A safer internet experience — without censoring opinions.
 
@@ -18,7 +18,7 @@ by context, not just keyword matching.
 
 ## Team
 
-Concept by Mo & Julien.
+Concept by Julien & Mo.
 
 ## Status
 
