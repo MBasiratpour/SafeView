@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SafeView — A safer internet experience, without censoring opinions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L21 6 V11 C21 16.5 17.5 20.8 12 22 C6.5 20.8 3 16.5 3 11 V6 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <path d="M8.5 12 L11 14.5 L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      SafeView
+    </a>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#levels">Classification</a>
+      <a href="#boundaries">Boundaries</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#modes">Protection Modes</a>
+      <a class="nav-repo" href="#">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">School project · Browser extension concept</p>
+    <h1>A safer internet<br>without censoring opinions.</h1>
+    <p class="hero-sub">SafeView is a browser add-on that hides, blurs, or warns about extremist propaganda the way SafeSearch handles explicit content — by reading context, not just keywords, so ordinary political speech is left alone.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#levels">See the classification model</a>
+      <a class="btn btn-ghost" href="#architecture">How it works</a>
+    </div>
+  </div>
+
+  <div class="mock-card" role="img" aria-label="Mockup of a blurred social media post with a SafeView warning overlay">
+    <div class="mock-card-head">
+      <span class="dot dot-red"></span><span class="dot dot-amber"></span><span class="dot dot-green"></span>
+      <span class="mock-url">feed.example.com</span>
+    </div>
+    <div class="mock-post">
+      <div class="mock-avatar"></div>
+      <div class="mock-lines">
+        <span class="mock-line w-40"></span>
+        <span class="mock-line w-70"></span>
+        <span class="mock-line w-55"></span>
+      </div>
+    </div>
+    <div class="mock-overlay">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2 L21 6 V11 C21 16.5 17.5 20.8 12 22 C6.5 20.8 3 16.5 3 11 V6 Z" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="0.9" fill="currentColor"/></svg>
+      <div class="mock-overlay-text">
+        <strong>Extremist content detected</strong>
+        <span>Confidence 94% · Level 2</span>
+      </div>
+      <div class="mock-overlay-actions">
+        <button class="mock-btn">Show Content</button>
+        <button class="mock-btn mock-btn-quiet">Why?</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="concept">
+  <div class="section-inner two-col">
+    <div>
+      <h2>Context, not keywords</h2>
+      <p>The key difference from a simple keyword blocker is context. SafeView distinguishes between content that <em>promotes or glorifies</em> an ideology and content that discusses, reports on, researches, or criticizes it.</p>
+      <div class="compare-pair">
+        <div class="compare-block compare-good">
+          <span class="compare-tag">Stays visible</span>
+          <p>"The Nazi regime used propaganda to spread its ideology."</p>
+          <span class="compare-note">Educational — historical framing</span>
+        </div>
+        <div class="compare-block compare-bad">
+          <span class="compare-tag">Flagged</span>
+          <p>A statement praising or encouraging support for the same ideology.</p>
+          <span class="compare-note">Promotional — glorifying framing</span>
+        </div>
+      </div>
+    </div>
+    <ul class="goal-list">
+      <li>Protect children and teenagers from explicit extremist propaganda</li>
+      <li>Give adults control over the political content they do and don't want to see</li>
+      <li>Provide parents and schools with configurable protection levels</li>
+      <li>Reduce accidental exposure on social media and websites</li>
+      <li>Avoid treating ordinary political opinions as extremist content</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-alt" id="levels">
+  <div class="section-inner">
+    <h2>Four classification levels</h2>
+    <p class="section-lede">A 0–100 internal risk score maps to one of four visible behaviors. Thresholds are meant to be validated through testing, not fixed in stone.</p>
+
+    <div class="level-scale">
+      <article class="level level-0">
+        <div class="level-head"><span class="level-num">0</span><h3>Normal Political Content</h3></div>
+        <p>No action. Political discussion, election coverage, opinions, historical documentaries, criticism of extremist movements.</p>
+      </article>
+      <article class="level level-1">
+        <div class="level-head"><span class="level-num">1</span><h3>Potentially Problematic</h3></div>
+        <p>Labeled with a warning but stays visible. The user chooses whether to continue.</p>
+      </article>
+      <article class="level level-2">
+        <div class="level-head"><span class="level-num">2</span><h3>Extremist Content</h3></div>
+        <p>Blurred or hidden by default. "Show Content" is available if the user's settings allow it.</p>
+      </article>
+      <article class="level level-3">
+        <div class="level-head"><span class="level-num">3</span><h3>Explicit Propaganda</h3></div>
+        <p>Recruitment, glorification, or support for violence — strongly hidden or fully blocked in Child Mode.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="boundaries">
+  <div class="section-inner two-col">
+    <div>
+      <h2>What SafeView should never block</h2>
+      <p>A core principle is avoiding political censorship. The system targets extremist <em>advocacy</em> — not the presence of a right-wing topic.</p>
+      <ul class="check-list">
+        <li>Conservative or other non-extremist political opinions</li>
+        <li>Criticism of immigration, governments, or political parties</li>
+        <li>News reporting about extremist organizations</li>
+        <li>Historical or educational material</li>
+        <li>Academic research</li>
+        <li>Satire and commentary</li>
+        <li>Content that condemns or analyzes extremist ideology</li>
+      </ul>
+    </div>
+    <div class="code-panel" aria-label="Example explainability output">
+      <div class="code-panel-head">
+        <span>Why was this hidden?</span>
+      </div>
+      <pre><code><span class="tok-key">Classification</span>: Extremist propaganda
+<span class="tok-key">Confidence</span>: 94%
+<span class="tok-key">Signals</span>:
+  - explicit extremist messaging
+  - glorification
+  - propaganda-style language
+<span class="tok-key">Context</span>: promotes rather than
+  discusses the ideology</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="architecture">
+  <div class="section-inner">
+    <h2>System architecture</h2>
+    <p class="section-lede">Analysis happens in layers, favoring on-device processing over sending browsing activity to a server.</p>
+    <div class="flow">
+      <span class="flow-step">Browser</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Content Script</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Text / Image / Video Analysis</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Context Classifier</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step flow-highlight">Risk Score</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">SAFE / WARN / BLUR / BLOCK</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">User Interface</span>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Text analysis</h3>
+        <p>Reads visible text, titles, descriptions, captions, and comments — with sentence-level context, not word matching.</p>
+      </div>
+      <div class="feature">
+        <h3>Image analysis</h3>
+        <p>Detects propaganda imagery and symbols in posters, memes, and photos, blurring above the user's risk threshold.</p>
+      </div>
+      <div class="feature">
+        <h3>Video analysis</h3>
+        <p>Combines title, description, thumbnail, captions, and transcript to catch content a neutral title would hide.</p>
+      </div>
+      <div class="feature">
+        <h3>Page-level analysis</h3>
+        <p>Estimates whether a whole page reads as informational, journalistic, or propagandistic overall.</p>
+      </div>
+      <div class="feature">
+        <h3>Social platforms</h3>
+        <p>Built for YouTube, Reddit, X, TikTok, Instagram, Facebook, Discord Web, and forums — flagged posts become a warning card, not a deletion.</p>
+      </div>
+      <div class="feature">
+        <h3>Privacy-first</h3>
+        <p>No personal browsing profile. What's processed remotely, if anything, is stated clearly to the user.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="modes">
+  <div class="section-inner">
+    <h2>Protection modes</h2>
+    <div class="mode-grid">
+      <div class="mode-card"><h3>Minimal</h3><p>Only highly confident extremist content is hidden.</p></div>
+      <div class="mode-card mode-default"><h3>Balanced <span class="mode-badge">Default</span></h3><p>Suspicious content receives warnings or is blurred.</p></div>
+      <div class="mode-card"><h3>Strict</h3><p>More potentially extremist propaganda is hidden automatically.</p></div>
+      <div class="mode-card mode-child"><h3>Child Mode</h3><p>Strong filtering; settings are locked behind a parent or administrator.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L21 6 V11 C21 16.5 17.5 20.8 12 22 C6.5 20.8 3 16.5 3 11 V6 Z" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </span>
+      SafeView
+    </div>
+    <p>A school project concept for a context-aware, privacy-first content extension. Built with Python, JavaScript, and HTML/CSS.</p>
+    <p class="footer-credit">Concept by Mo &amp; Julien</p>
+  </div>
+</footer>
+
+</body>
+</html>
